@@ -6,7 +6,8 @@ namespace Unit3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string myName = "Regan";
+            Console.WriteLine("Hello " + myName);
         }
     }
 }
