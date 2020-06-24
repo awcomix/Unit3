@@ -17,78 +17,42 @@ namespace Unit3
 
             // Instantiating another movie object, again using the constructor with 3 parameters
             // Note the use of the 'var' keyword, instead of using the 'Movie' keyword, which is redundant
-            var myOtherMovie = new Movie("Toy Story", "Unkown", 1995);
+            //var myOtherMovie = new Movie("Toy Story", "Unkown", 1995);
 
             // Print the details of myOtherMovie
-            myOtherMovie.PrintDetails();
+            //myOtherMovie.PrintDetails();
 
-            // Instantiating a third movie object. 
-            //This time we don't pass any parameters, so the compiler chooses the constructor that doesn't have any parameters
-            var anotherMovie = new Movie();
+            Console.WriteLine(myMovie.Title); // OK
+            //myMovie.Title = "incorrect title";
+            Console.WriteLine(myMovie.GetDirector()); // OK
+            //myMovie.director ="incorrect director"; // BAD!
+            return;
 
-            // Print the details of the third movie
-            anotherMovie.PrintDetails();
+            for (int i = 0; i < 5; i++) {
+                Console.WriteLine($"Please enter a rating between 1 and 5 for the movie {myMovie.Title}");
+                string userInput = Console.ReadLine();
+                int intRating = Convert.ToInt32(userInput);
+                myMovie.Rate(intRating);
+            }
 
+            double averageRating = myMovie.GetAverageRating();
+            Console.WriteLine($"The average rating is: {averageRating}");
         }
 
     }
-
-    class Car {
-        int year;
-
-        char motorSize;
-
-        string color;
-
-        int numberOfDoors;
-
-        string make;
-
-        string model;
-
-        bool isUsed;
-
-    }
-
-
-
-    class Movie {
-        string title;
-        string director;
-        int runtimeInMinutes;
-        int year;
-        string genre;
-        byte rating;
-
-        // Constructor: Special method to build object
-        // When you instantiate the movie with a 2 strings and an int, this constructor gets called
-        // example: var someMovie = new Movie("Toy Story", "Unkown", 1995);
-        public Movie(string theTitle, string theDirector, int theYear) {
-            title = theTitle;
-            director = theDirector;
-            year = theYear;
-            rating = 5;
-        }
-
-        // Another constructor. When you instantiate the movie without any parameters, this constructor is used to build the object
-        // example: var myEmptyMovie = new Movie();
-        public Movie() {
-            title = "Default title";
-            year = 1900;
-        }
-
-        // Class method. Since it is public, we can access it from the Main function
-        // Since it is a class method (defined in the class), it hsa access to the data members of the class
-        public void PrintDetails() {
-            Console.WriteLine($"Title: {title}");
-            Console.WriteLine($"Director: {director}");
-            Console.WriteLine($"Year: {year}");
-            Console.WriteLine($"Runtime: {runtimeInMinutes}");
-            Console.WriteLine($"Rating: {rating}");
-            Console.WriteLine("-------------");
-        }
-
-    }
-
-
 }
+
+
+/*
+var theHashtags = new List<string>(){ "hashtag1", "firstpost" };
+// theHashtags.Add("hashtag1");
+// theHashtags.Add("firstpost");
+
+var myPost = new Post(
+    "Hello, this is my first post!", 
+    theHashtags, 
+    "test_user");
+
+myPost.PrintDetails();
+
+*/
