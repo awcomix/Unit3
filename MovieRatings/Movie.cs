@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Unit3
+namespace MovieRatings
 {
     class Movie {
         static int minimumRating = 1;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using PasswordGenerator;
 
-namespace Unit3
+namespace MovieRatings
 {
     class MovieRunner
     {
