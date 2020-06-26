@@ -5,7 +5,6 @@ namespace Unit3
 {
     class Post {
         /*** Data members ***/
-        int numViews;
         int numLikes;
         string text;
         string username;
@@ -18,16 +17,21 @@ namespace Unit3
             hashtags = theHashtags;
             username = theUsername;
             numLikes = 0;
-            numViews = 0;
             dateCreated = DateTime.Now;
-            //dateCreated = new DateTime(2020, 6, 23);
         }
 
         /*** Methods ***/
-        // share the post
-        // like the post
-        // unlike the post
-        // delete the post
+        public void Like() {
+            numLikes++;
+        }
+
+        public void Unlike() {
+            if (numLikes > 0) {
+                numLikes--;
+            } else {
+                throw new Exception("Likes can't be below 0");
+            }
+        }
 
         public void PrintDetails() {
             Console.WriteLine($"Text: {text}");
