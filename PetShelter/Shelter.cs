@@ -4,19 +4,24 @@ using System.Collections.Generic;
 namespace PetShelter
 {
     class Shelter {
-        List<Pet> _petList;
+        IPetStorage _petStorage;
+
+        List<Adoption> _adoptionList;
+
+
         int _numAdoptions;
         int _capacity;
 
-        public Shelter(int capacityArg) {
-            _petList = new List<Pet>();
+        public Shelter(int capacityArg, IPetStorage myPetStorage) {
+            _petStorage = myPetStorage;
+            _adoptionList = new List<Adoption>();
             _numAdoptions = 0;
             _capacity = capacityArg;
         }
 
         public void ReceiveNewPet(Pet newPet) {
-            if (_petList.Count <= _capacity) {
-                _petList.Add(newPet);
+            if (_petStorage.NumberOfPets() < _capacity) {
+                _petStorage.Save(newPet);
                 Console.WriteLine("Received a new pet!");
             } else {
                 throw new Exception("Sorry, shelter is full.");
@@ -24,13 +29,40 @@ namespace PetShelter
         }
 
         public void ListAllPets() {
-            foreach (var pet in _petList) {
+            Console.WriteLine("\n----- ALL PETS -----");
+            foreach (var pet in _petStorage.GetAll()) {
                 pet.PrintDetails();
             }
+            Console.WriteLine("----------------\n");
         }
 
-        public void AdoptAPet(string name) {
-            // Adopt
+        public void ListAllAdoptions() {
+            Console.WriteLine("\n----- ALL ADOPTIONS -----");
+            foreach (var adoption in _adoptionList) {
+                adoption.PrintDetails();
+            }
+            Console.WriteLine("----------------\n");
+        }
+
+        public void AdoptAPet(string nameRequested, string nameOfAdopter, string phoneOfAdopter) {
+            bool foundPet = false;
+
+            var allPets = _petStorage.GetAll();
+            foreach (var pet in allPets) {
+                if (nameRequested == pet.Name) {
+                    foundPet = true;
+                    pet.Adopt();
+                    var newAdoptionRecord = new Adoption(nameOfAdopter, phoneOfAdopter, pet);
+                    _adoptionList.Add(newAdoptionRecord);
+                    _petStorage.Remove(pet);
+                    break;
+                }
+            }
+
+            if (foundPet == false) {
+                Console.WriteLine("No pet by that name was found");
+            }
+
         }
 
     }
