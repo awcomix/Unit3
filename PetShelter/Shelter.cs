@@ -5,7 +5,9 @@ namespace PetShelter
 {
     class Shelter {
         IPetStorage _petStorage;
-
+    
+        // Replace this with IAdoptionStorage
+        // Will need to be replaced everywhere in the class
         List<Adoption> _adoptionList;
 
 
@@ -14,6 +16,7 @@ namespace PetShelter
 
         public Shelter(int capacityArg, IPetStorage myPetStorage) {
             _petStorage = myPetStorage;
+            // Pass an IAdoptionStorage object into the constructor
             _adoptionList = new List<Adoption>();
             _numAdoptions = 0;
             _capacity = capacityArg;
